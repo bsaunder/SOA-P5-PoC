@@ -5,7 +5,9 @@
  <services>
   <service category="Stock" description="Stock Quote" invmScope="GLOBAL" name="Quote">
    <listeners>
-    <http-gateway name="StockQuote-GwListener"/>
+   	<!-- Endpoint will be at: http://<HOST>:<PORT>/<ESB_PROJECT>/http/<URL_PATTERN> -->
+   	<!-- Goto http://localhost:8080/contract/ To check Endpoint URL's -->
+    <http-gateway name="StockQuote-GwListener" urlPattern="StockWS/*"/>
    </listeners>
    <actions mep="RequestResponse">
     <action class="org.jboss.soa.esb.actions.SystemPrintln" name="EchoRequest1">
