@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<jbossesb
+ xmlns="http://anonsvn.labs.jboss.com/labs/jbossesb/trunk/product/etc/schemas/xml/jbossesb-1.3.1.xsd"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://anonsvn.labs.jboss.com/labs/jbossesb/trunk/product/etc/schemas/xml/jbossesb-1.3.1.xsd http://anonsvn.jboss.org/repos/labs/labs/jbossesb/trunk/product/etc/schemas/xml/jbossesb-1.3.1.xsd">
+ <services>
+  <service category="Stock" description="Stock Quote" invmScope="GLOBAL" name="Quote">
+   <listeners>
+   	<!-- Endpoint will be at: http://<HOST>:<PORT>/<ESB_PROJECT>/http/<URL_PATTERN> -->
+   	<!-- Goto http://localhost:8080/contract/ To check Endpoint URL's -->
+    <http-gateway name="StockQuote-GwListener" urlPattern="StockWS/*"/>
+   </listeners>
+   <actions mep="RequestResponse">
+    <action class="org.jboss.soa.esb.actions.SystemPrintln" name="EchoRequest1">
+     <property name="message" value="Message before Replace"/>
+    </action>
+    <action
+     class="org.redhat.consulting.netpdtc.semi.poc.soapproxy.action.StringReplaceAction" name="ReplaceMSFT">
+     <property name="findValue" value="MSFT"/>
+     <property name="replaceValue" value="RHT"/>
+    </action>
+    <action class="org.jboss.soa.esb.actions.SystemPrintln" name="EchoRequest2">
+     <property name="message" value="Message before SOAPProxy"/>
+    </action>
+    <action class="org.jboss.soa.esb.actions.soap.proxy.SOAPProxy" name="proxy">
+     <property name="wsdl" value="http://www.webservicex.net/stockquote.asmx?WSDL"/>
+    </action>
+    <action class="org.jboss.soa.esb.actions.SystemPrintln" name="EchoResponse1">
+     <property name="message" value="Message after SOAPProxy"/>
+    </action>
+    <action
+     class="org.redhat.consulting.netpdtc.semi.poc.soapproxy.action.StringReplaceAction" name="ReplacePrice">
+     <property name="findValue" value="&amp;lt;Last&amp;gt;[0-9\.]+&amp;lt;/Last&amp;gt;"/>
+     <property name="replaceValue" value="&amp;lt;Last&amp;gt;99.99&amp;lt;/Last&amp;gt;"/>
+    </action>
+    <action class="org.jboss.soa.esb.actions.SystemPrintln" name="EchoResponse2">
+     <property name="message" value="Message after Replace"/>
+    </action>
+   </actions>
+  </service>
+ </services>
+</jbossesb>

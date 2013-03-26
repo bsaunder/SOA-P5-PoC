@@ -9,7 +9,8 @@
 	<packaging>jboss-esb</packaging>
 
 	<properties>
-		<jbossesb.home>C:/jboss-soa-p-standalone-5/jboss-esb</jbossesb.home>
+		<!-- <jbossesb.home>C:/jboss-soa-p-standalone-5/jboss-esb</jbossesb.home> -->
+		<jbossesb.home>/home/bryan/jboss-soa-p-standalone-5/jboss-esb</jbossesb.home>
 		<jbossesb.version>4.11</jbossesb.version>
 		<jbossesb.lib>${jbossesb.home}/server/default/deployers/esb.deployer/lib</jbossesb.lib>
 	</properties>
