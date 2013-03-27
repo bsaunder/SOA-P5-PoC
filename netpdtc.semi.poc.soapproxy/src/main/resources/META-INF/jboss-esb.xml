@@ -5,8 +5,8 @@
  <services>
   <service category="Stock" description="Stock Quote" invmScope="GLOBAL" name="Quote">
    <listeners>
-   	<!-- Endpoint will be at: http://<HOST>:<PORT>/<ESB_PROJECT>/http/<URL_PATTERN> -->
-   	<!-- Goto http://localhost:8080/contract/ To check Endpoint URL's -->
+    <!-- Endpoint will be at: http://<HOST>:<PORT>/<ESB_PROJECT>/http/<URL_PATTERN> 
+ Goto http://localhost:8080/contract/ To check Endpoint URL's -->
     <http-gateway name="StockQuote-GwListener" urlPattern="StockWS/*"/>
    </listeners>
    <actions mep="RequestResponse">
@@ -22,7 +22,8 @@
      <property name="message" value="Message before SOAPProxy"/>
     </action>
     <action class="org.jboss.soa.esb.actions.soap.proxy.SOAPProxy" name="proxy">
-     <property name="wsdl" value="http://www.webservicex.net/stockquote.asmx?WSDL"/>
+     <property name="wsdl" value="classpath:///META-INF/stockquoteWS.wsdl"/>
+     <property name="endpointUrl" value="http://www.webservicex.net/stockquote.asmx"/>
     </action>
     <action class="org.jboss.soa.esb.actions.SystemPrintln" name="EchoResponse1">
      <property name="message" value="Message after SOAPProxy"/>
