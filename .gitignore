@@ -18,6 +18,7 @@ local.properties
 target/
 */target/
 target
+*.checkstyle
 
 # External tool builders
 .externalToolBuilders/

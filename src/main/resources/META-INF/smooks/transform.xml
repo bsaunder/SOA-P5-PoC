@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smooks-resource-list xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd"
+	xmlns:xsl="http://www.milyn.org/xsd/smooks/xsl-1.1.xsd" xmlns:core="http://www.milyn.org/xsd/smooks/smooks-core-1.4.xsd">
+
+	<!-- Define Namespaces -->
+	<core:namespaces>
+		<core:namespace prefix="wsdl"
+			uri="http://schemas.xmlsoap.org/wsdl/" />
+	</core:namespaces>
+
+	<!-- Work Around for SOAP 1.2 Bug: https://issues.jboss.org/browse/JBESB-3783 -->
+	<resource-config selector="port address"
+		selector-namespace="http://schemas.xmlsoap.org/wsdl/soap12/">
+		<resource>org.jboss.soa.esb.actions.soap.WsdlEndpointTransformer
+		</resource>
+	</resource-config>
+
+	<!-- Add WS-Security -->
+	<xsl:xsl applyOnElement="wsdl:types">
+		<xsl:template>META-INF/xslt/addWSSecurity.xsl</xsl:template>
+		<xsl:use>
+			<xsl:inline directive="insertbefore" />
+		</xsl:use>
+	</xsl:xsl>
+
+	<xsl:xsl applyOnElement="wsdl:types">
+		<xsl:template>META-INF/xslt/addUsernameTokenPolicy.xsl</xsl:template>
+		<xsl:use>
+			<xsl:inline directive="insertbefore" />
+		</xsl:use>
+	</xsl:xsl>
+	
+	<!-- TODO: Adds to the PortType Operation as well as the Binding Operation...  -->
+	<xsl:xsl applyOnElement="wsdl:operation">
+		<xsl:template>META-INF/xslt/addUsernameTokenReference.xsl</xsl:template>
+		<xsl:use>
+			<xsl:inline directive="addto" />
+		</xsl:use>
+	</xsl:xsl>
+
+</smooks-resource-list>
+
