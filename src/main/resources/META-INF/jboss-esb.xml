@@ -39,9 +39,7 @@
     <action class="org.jboss.soa.esb.actions.soap.proxy.SOAPProxy" name="WSProxy">
      <property name="wsdl" value="http://localhost:8088/mockStockQuoteSoap?wsdl"/>
      
-     <!-- Transforms the WSDL with a Single XSLT Transform  
-     	This does not work, It causes some weird Errors.
-     -->
+     <!-- Transforms the WSDL with Smooks -->
      <property name="wsdlTransform" value="/META-INF/smooks/transform.xml" />
     </action>
     

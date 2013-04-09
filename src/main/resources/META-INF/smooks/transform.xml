@@ -30,8 +30,8 @@
 		</xsl:use>
 	</xsl:xsl>
 	
-	<!-- TODO: Adds to the PortType Operation as well as the Binding Operation...  -->
-	<xsl:xsl applyOnElement="wsdl:operation">
+	<!-- Adds Username Token Policy Reference  -->
+	<xsl:xsl applyOnElement="wsdl:binding/wsdl:operation">
 		<xsl:template>META-INF/xslt/addUsernameTokenReference.xsl</xsl:template>
 		<xsl:use>
 			<xsl:inline directive="addto" />
