@@ -57,6 +57,7 @@
     <action class="org.jboss.soa.esb.actions.SystemPrintln" name="EchoResponse2">
      <property name="message" value="Message after Replace"/>
     </action>
+    
    </actions>
   </service>
  </services>
